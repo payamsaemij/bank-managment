@@ -1,6 +1,5 @@
 
 from unittest.mock import Mock, patch
-import app.db.models
 from app.features.customers import service
 from app.features.customers.models import Customer
 from app.features.customers.schemas import CustomerCreate

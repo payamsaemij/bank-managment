@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from typing import TYPE_CHECKING
 from sqlalchemy import (
     CheckConstraint,
     Date,
@@ -9,6 +10,10 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
+
+if TYPE_CHECKING:
+    from app.features.customers.models import Customer
+    from app.features.employees.models import Employee
 
 
 class Person(Base):
@@ -55,7 +60,7 @@ class Person(Base):
     )
 
     customer: Mapped["Customer | None"] = relationship(
-        back_populates= "person",
+        back_populates="person",
         uselist=False,
     )
 

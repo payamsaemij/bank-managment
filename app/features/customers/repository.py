@@ -11,6 +11,7 @@ def get_person_by_email(
     statement = select(Person).where(Person.email == email)
     return db.scalar(statement=statement)
 
+
 def get_customer_by_id(
         db: Session,
         customer_id: int,
@@ -20,7 +21,7 @@ def get_customer_by_id(
         .options(selectinload(Customer.person))
         .where(Customer.id == customer_id)
     )
-    return  db.scalar(statement=statement)
+    return db.scalar(statement=statement)
 
 
 def create_person(

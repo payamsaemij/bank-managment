@@ -10,6 +10,7 @@ router = APIRouter(
     tags=["Customer"],
 )
 
+
 @router.post(
     "/",
     response_model=CustomerResponse,

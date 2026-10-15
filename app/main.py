@@ -1,6 +1,7 @@
 
 from contextlib import asynccontextmanager
-import app.db.models
+# Import all models so they are registered with the shared Base.metadata.
+from app.db import models  # noqa: F401
 from fastapi import FastAPI
 from app.features.customers.router import router as customers_router
 
