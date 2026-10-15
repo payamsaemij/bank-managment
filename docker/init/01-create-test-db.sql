@@ -1,0 +1,1 @@
+CREATE DATABASE banking_test_db OWNER bank_app;
