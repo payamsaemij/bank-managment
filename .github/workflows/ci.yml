@@ -1,0 +1,52 @@
+
+name: Banking System CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality-checks:
+    name: Lint, Unit Tests and Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 pytest-cov
+
+      - name: Run Flake8
+        run: flake8 .
+
+      - name: Run Unit Tests with Coverage
+        run: |
+          pytest --cov=app --cov-report=term-missing --cov-report=html --cov-report=xml
+
+      - name: Upload HTML Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Upload Coverage XML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: ignore
+          retention-days: 14
