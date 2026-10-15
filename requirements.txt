@@ -4,3 +4,7 @@ pytest
 pytest-cov
 flake8
 httpx2
+pydantic_settings
+sqlalchemy
+pwdlib
+alembic
