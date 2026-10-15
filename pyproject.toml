@@ -1,0 +1,25 @@
+[project]
+name = "bank-managment"
+version = "0.1.0"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic-settings",
+    "sqlalchemy",
+    "pwdlib[argon2]",
+    "alembic",
+    "psycopg[binary]",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "httpx",
+    "flake8",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
