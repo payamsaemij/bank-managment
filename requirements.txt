@@ -9,3 +9,5 @@ sqlalchemy
 pwdlib
 alembic
 email-validator
+psycopg[binary]
+pwdlib[argon2]
