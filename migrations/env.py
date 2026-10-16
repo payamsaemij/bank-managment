@@ -2,16 +2,16 @@ from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
-
 from app.core.config import settings
 from app.db.base import Base
-
 # Import models so all tables are registered in Base.metadata.
 from app.features.persons.models import Person
 from app.features.customers.models import Customer
 from app.features.employees.models import Employee
 from app.features.branches.models import Branch
 from app.features.accounts.models import Account
+from app.features.customer_accounts.models import CustomerAccount
+
 
 config = context.config
 

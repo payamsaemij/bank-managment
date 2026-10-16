@@ -3,6 +3,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from app.core.config import settings
+import app.db.models  # noqa: F401
 
 
 @pytest.fixture

@@ -27,3 +27,8 @@ class Customer(Base):
     person: Mapped["Person"] = relationship(
         back_populates="customer",
     )
+
+    customer_accounts = relationship(
+        "CustomerAccount",
+        back_populates="customer",
+    )
