@@ -52,7 +52,7 @@ class AccountOpeningRequest(Base):
     initial_deposit_amount: Mapped[int] = mapped_column(
         BigInteger,
         nullable=False,
-)
+    )
 
     status: Mapped[AccountOpeningRequestStatus] = mapped_column(
         Enum(
