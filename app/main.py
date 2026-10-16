@@ -4,7 +4,9 @@ from contextlib import asynccontextmanager
 from app.db import models  # noqa: F401
 from fastapi import FastAPI
 from app.features.customers.router import router as customers_router
-
+from app.features.account_opening_requests.router import (
+    router as account_opening_requests_router,
+)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -21,6 +23,7 @@ app = FastAPI(
 )
 
 app.include_router(customers_router)
+app.include_router(account_opening_requests_router)
 
 
 @app.get("/health")
