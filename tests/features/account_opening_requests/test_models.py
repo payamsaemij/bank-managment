@@ -1,4 +1,3 @@
-
 import pytest
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -42,13 +41,16 @@ def create_customer_and_branch(
     return customer, branch
 
 
-def test_create_account_opening_request(db_session: Session) -> None:
+def test_create_account_opening_request(
+    db_session: Session,
+) -> None:
     customer, branch = create_customer_and_branch(db_session)
 
     request = AccountOpeningRequest(
         customer_id=customer.id,
         branch_id=branch.id,
         account_type=AccountType.CHECKING,
+        initial_deposit_amount=5_000_000,
     )
 
     db_session.add(request)
@@ -58,6 +60,7 @@ def test_create_account_opening_request(db_session: Session) -> None:
     assert request.customer_id == customer.id
     assert request.branch_id == branch.id
     assert request.account_type == AccountType.CHECKING
+    assert request.initial_deposit_amount == 5_000_000
     assert request.status == AccountOpeningRequestStatus.PENDING
     assert request.reviewed_by is None
     assert request.reviewed_at is None
@@ -73,6 +76,7 @@ def test_account_opening_request_relationships(
         customer_id=customer.id,
         branch_id=branch.id,
         account_type=AccountType.SAVINGS,
+        initial_deposit_amount=10_000_000,
     )
 
     db_session.add(request)
@@ -86,6 +90,7 @@ def test_account_opening_request_relationships(
 
     assert saved_request.customer.id == customer.id
     assert saved_request.branch.id == branch.id
+    assert saved_request.initial_deposit_amount == 10_000_000
 
 
 def test_account_opening_request_rejects_invalid_customer(
@@ -97,6 +102,27 @@ def test_account_opening_request_rejects_invalid_customer(
         customer_id=-999,
         branch_id=branch.id,
         account_type=AccountType.CHECKING,
+        initial_deposit_amount=5_000_000,
+    )
+
+    db_session.add(request)
+
+    with pytest.raises(IntegrityError):
+        db_session.flush()
+
+    db_session.rollback()
+
+
+def test_account_opening_request_rejects_negative_initial_deposit(
+    db_session: Session,
+) -> None:
+    customer, branch = create_customer_and_branch(db_session)
+
+    request = AccountOpeningRequest(
+        customer_id=customer.id,
+        branch_id=branch.id,
+        account_type=AccountType.CHECKING,
+        initial_deposit_amount=-1,
     )
 
     db_session.add(request)
