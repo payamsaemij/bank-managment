@@ -9,7 +9,7 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
+from sqlalchemy import BigInteger
 from app.db.base import Base
 from app.features.accounts.models import AccountType
 
@@ -48,6 +48,11 @@ class AccountOpeningRequest(Base):
         ),
         nullable=False,
     )
+
+    initial_deposit_amount: Mapped[int] = mapped_column(
+        BigInteger,
+        nullable=False,
+)
 
     status: Mapped[AccountOpeningRequestStatus] = mapped_column(
         Enum(
