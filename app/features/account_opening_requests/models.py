@@ -2,14 +2,15 @@
 import enum
 from datetime import datetime
 from sqlalchemy import (
+    CheckConstraint,
     DateTime,
     Enum,
     ForeignKey,
     String,
+    BigInteger,
     func,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import BigInteger
 from app.db.base import Base
 from app.features.accounts.models import AccountType
 
@@ -22,6 +23,12 @@ class AccountOpeningRequestStatus(str, enum.Enum):
 
 class AccountOpeningRequest(Base):
     __tablename__ = "account_opening_requests"
+    __table_args__ = (
+        CheckConstraint(
+            "initial_deposit_amount >= 0",
+            name="ck_account_opening_request_initial_deposit_non_negative",
+        ),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
