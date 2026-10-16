@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 import app.db.models  # noqa: F401
 
+
 @pytest.fixture
 def db_session() -> Session:  # type: ignore
     engine = create_engine(

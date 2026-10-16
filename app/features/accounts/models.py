@@ -12,8 +12,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 
 
-
-
 class AccountType(str, enum.Enum):
     CHECKING = "checking"
     SAVINGS = "savings"
@@ -77,8 +75,8 @@ class Account(Base):
         nullable=False,
         server_default=func.now()
     )
-    
+
     customer_accounts = relationship(
-    "CustomerAccount",
-    back_populates="account",
+        "CustomerAccount",
+        back_populates="account",
     )

@@ -6,4 +6,9 @@ from app.features.accounts.models import Account
 from app.features.customer_accounts.models import CustomerAccount
 
 
-__all__ = ["Person", "Customer", "Employee", "Branch", "Account", "CustomerAccount"]
+__all__ = ["Person",
+           "Customer",
+           "Employee",
+           "Branch",
+           "Account",
+           "CustomerAccount"]
