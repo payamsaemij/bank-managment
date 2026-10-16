@@ -8,6 +8,7 @@ from app.features.account_opening_requests.router import (
     router as account_opening_requests_router,
 )
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Banking System API is starting up...")

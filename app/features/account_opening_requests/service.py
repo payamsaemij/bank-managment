@@ -5,7 +5,8 @@ from app.features.account_opening_requests.models import (
     AccountOpeningRequest,
     AccountOpeningRequestStatus,
 )
-from app.features.account_opening_requests.schemas import AccountOpeningRequestCreate
+from app.features.account_opening_requests.schemas import (
+    AccountOpeningRequestCreate)
 
 
 def create_account_opening_request(
