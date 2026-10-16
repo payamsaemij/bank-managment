@@ -11,6 +11,7 @@ from app.features.employees.models import Employee
 from app.features.branches.models import Branch
 from app.features.accounts.models import Account
 from app.features.customer_accounts.models import CustomerAccount
+from app.features.account_opening_requests.models import AccountOpeningRequest
 
 
 config = context.config
