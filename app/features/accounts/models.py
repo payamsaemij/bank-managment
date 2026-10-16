@@ -8,8 +8,10 @@ from sqlalchemy import (
     String,
     func,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
+
+
 
 
 class AccountType(str, enum.Enum):
@@ -74,4 +76,9 @@ class Account(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now()
+    )
+    
+    customer_accounts = relationship(
+    "CustomerAccount",
+    back_populates="account",
     )
