@@ -10,6 +10,7 @@ from app.db.base import Base
 from app.features.persons.models import Person
 from app.features.customers.models import Customer
 from app.features.employees.models import Employee
+from app.features.branches.models import Branch
 
 config = context.config
 
