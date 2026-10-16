@@ -1,4 +1,5 @@
 from logging.config import fileConfig
+import os
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
@@ -11,6 +12,7 @@ from app.features.employees.models import Employee
 from app.features.branches.models import Branch
 from app.features.accounts.models import Account
 from app.features.customer_accounts.models import CustomerAccount
+from app.features.account_opening_requests.models import AccountOpeningRequest
 
 
 config = context.config
@@ -21,6 +23,18 @@ if config.config_file_name is not None:
 config.set_main_option(
     "sqlalchemy.url",
     settings.database_url.replace("%", "%%"),
+)
+
+
+database_url = (
+    settings.test_database_url
+    if os.getenv("ALEMBIC_ENV") == "test"
+    else settings.database_url
+)
+
+config.set_main_option(
+    "sqlalchemy.url",
+    database_url.replace("%", "%%"),
 )
 
 target_metadata = Base.metadata
