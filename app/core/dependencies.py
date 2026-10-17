@@ -1,10 +1,8 @@
-
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy.orm import Session
 from app.features.customers.models import Customer
-
 from app.core.security import decode_access_token
 from app.db.session import get_db
 from app.features.auth import repository
@@ -51,6 +49,7 @@ def get_current_person(
         raise unauthorized_exception
 
     return person
+
 
 def get_current_customer(
     current_person: Person = Depends(get_current_person),
