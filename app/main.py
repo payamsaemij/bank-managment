@@ -7,6 +7,7 @@ from app.features.customers.router import router as customers_router
 from app.features.account_opening_requests.router import (
     router as account_opening_requests_router,
 )
+from app.features.auth.router import router as auth_router
 
 
 @asynccontextmanager
@@ -25,6 +26,7 @@ app = FastAPI(
 
 app.include_router(customers_router)
 app.include_router(account_opening_requests_router)
+app.include_router(auth_router)
 
 
 @app.get("/health")
