@@ -38,7 +38,7 @@ jobs:
     env:
       DATABASE_URL: postgresql+psycopg://bank_app:bank_dev_password@127.0.0.1:5432/banking_test_db
       TEST_DATABASE_URL: postgresql+psycopg://bank_app:bank_dev_password@127.0.0.1:5432/banking_test_db
-
+      JWT_SECRET_KEY: 7314f60ff6039c6a8065f4397f092144e46b8b61b9af7923bed3f4aa8fd76b82
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
